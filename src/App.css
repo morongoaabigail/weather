@@ -1,38 +1,36 @@
-.App {
-  text-align: center;
-}
+.App{
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+background-image: url("images/clouds.jpg");
+width: 100vw;
+height: 100vh;
+position: relative;
+background-color:black;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+color: white;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
+.location{
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  display: flex;
+  align-items: center;
+  margin-left: 50em;
+  font-weight: 100px;
+}
+.temp{
+  color: white;
+  display: flex;
+  align-items: center;
+  margin-left: 50em;
+  font-weight: 100px;
+
 }
 
-.App-link {
-  color: #61dafb;
+.p{
+  font-size: 1.6rem;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hi{
+  font-size: 6rem;
 }
