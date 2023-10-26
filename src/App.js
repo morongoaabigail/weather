@@ -1,35 +1,71 @@
-import React, { useState } from "react";
-import Axios from "axios";
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 
-function App() {
-  //const url=`https://api.openweathermap.org/data/2.5/weather?q=polokwane&appid=1d948668927d677488db4a4793e32aae`
+const Weather = () => {
+  const [city, setCity] = useState('');
+  const [weatherData, setWeatherData] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (city) {
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1d948668927d677488db4a4793e32aae`
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setWeatherData(data);
+            setError(null); // Clear any previous errors
+          } else {
+            setError('City not found. Please check the city name.');
+          }
+        } catch (error) {
+          console.error('Error fetching weather data', error);
+          setError('An error occurred while fetching weather data.');
+        }
+      }
+    };
+
+    fetchData();
+  }, [city]);
+
   return (
-    <div className="App">
-      <div className="conatiner">
-        <div className="top">
-          <div className="location">
-            <p>Polokwane</p>
-          </div>
-          <div className="temp">
-            <h1>60°F</h1>
-          </div>
-          <div className="description">
-            <p>clouds</p>
-          </div>
+    <div className='App'>
+      <div>
+        <input
+          placeholder=" Enter your location"
+          className="input"
+          type="text"
+          onChange={handleCityChange}
+        />
+      </div>
+      {error ? (
+        <p className="error-message">{error}</p>
+      ) : weatherData ? (
+        <div>
+          <h2 className='location'>{weatherData.name}, {weatherData.sys.country}</h2>
+          <p className='temp'>{weatherData.main.temp}°C</p>
+          <p className='description'>Weather: {weatherData.weather[0].description}</p>
         </div>
-        <div className="bottom">
-          <div className="feels">
-            <p>65°F</p>
-          </div>
-          <div className="humidity">
-            <p>20%</p>
-          </div>
-          <div className="wind">12 MPH</div>
-        </div>
+
+        
+      ) : (
+        <p className='header'>Enter a city name to get weather information.</p>
+        
+      )}
+
+      <div className='bottom'>
+      <p>Humidity: {weatherData.main.humidity}%</p>
+      <p>Wind Speed: {weatherData.wind.speed} m/s</p>
+
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Weather;
