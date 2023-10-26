@@ -51,6 +51,9 @@ const Weather = () => {
           <h2 className='location'>{weatherData.name}, {weatherData.sys.country}</h2>
           <p className='temp'>{weatherData.main.temp}°C</p>
           <p className='description'>Weather: {weatherData.weather[0].description}</p>
+          <p className='bottom'>Humidity: {weatherData.main.humidity}%</p>
+          <p className='bottom2'>Wind Speed: {weatherData.wind.speed} m/s</p>
+         
         </div>
 
         
@@ -59,11 +62,8 @@ const Weather = () => {
         
       )}
 
-      <div className='bottom'>
-      <p>Humidity: {weatherData.main.humidity}%</p>
-      <p>Wind Speed: {weatherData.wind.speed} m/s</p>
 
-      </div>
+     
     </div>
   );
 };
